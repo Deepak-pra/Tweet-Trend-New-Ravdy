@@ -4,12 +4,16 @@ pipeline {
             label 'maven'
         }
     }
+
+environment {
+    PATH = "/opt/apache-maven-3.9.9/bin:$PATH"
+}
     
     stages {
-        stage ('Clone-Code') {
-         steps {
-             git branch: 'main', url: 'https://github.com/Deepak-pra/Tweet-Trend-New-Ravdy.git'
-         }
-    }
+        stage ('Build') {
+            steps {
+                sh 'mvn clean deploy'
+            }
+        }
 }
 }
